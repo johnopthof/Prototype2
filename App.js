@@ -1,30 +1,31 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import {TouchableOpacity, Platform, StyleSheet, Text, View} from 'react-native';
+import CounterApp from './src/CounterApp.js'
+import { createStore } from 'redux';
+import {Provider} from 'react-redux';
 
 type Props = {};
+
+const initialState = {
+  counter: 0
+}
+
+ const reducer = (state=initialState) =>{
+   return state;
+ }
+ 
+ const store = createStore(reducer);
+ 
 export default class App extends Component<Props> {
+ 
+
+
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <Provider store={store}>
+        <CounterApp/>
+      </Provider>
     );
   }
 }
