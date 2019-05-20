@@ -22,22 +22,21 @@ type Props = {};
 export default class App extends Component<Props> {
   
   storeData = async () => {
-  try {
-    await AsyncStorage.setItem('key', 'I like to save it.');
-  } catch (error) {
-    console.log("Error saving data");
-  }
-};
+    try {
+      await AsyncStorage.setItem('key', 'I like to save it.');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem('key');
       if (value !== null) {
-        // We have data!!
         console.log(value);
       }
     } catch (error) {
-    console.log("Error retrieving data"); 
+      console.log(error); 
     }
   };
   
