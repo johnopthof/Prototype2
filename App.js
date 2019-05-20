@@ -3,6 +3,7 @@ import {TouchableOpacity, Button, Platform, StyleSheet, Text, View} from 'react-
 import CounterApp from './src/CounterApp.js'
 import { createStore } from 'redux';
 import {Provider} from 'react-redux';
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 type Props = {};
 
