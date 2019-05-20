@@ -1,24 +1,30 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Button, Text, View, AsyncStorage} from 'react-native';
+import {TouchableOpacity, Platform, StyleSheet, Text, View} from 'react-native';
+import CounterApp from './src/CounterApp.js'
+import { createStore } from 'redux';
+import {Provider} from 'react-redux';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
 
 
 type Props = {};
+
+const initialState = {
+  counter: 0
+}
+
+ const reducer = (state=initialState, action) =>{
+   switch(action.type) {
+     case "INCREASE_COUNTER": 
+        return { counter: state.counter + 1}
+     case "DECREASE_COUNTER":
+        return { counter: state.counter - 1}
+   }
+   return state;
+ }
+ 
+ const store = createStore(reducer);
+ 
 export default class App extends Component<Props> {
   
   storeData = async () => {
@@ -42,17 +48,19 @@ export default class App extends Component<Props> {
   
   render() {
     return (
+
+      <Provider store={store}>
+        <CounterApp/>
+      </Provider>
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
          <Button title="storeData" onPress={this.storeData}></Button>
-         
+        
         <Button title="Load data" onPress={this.retrieveData}></Button>
       </View>
+
     );
   }
-}
+} 
 
 const styles = StyleSheet.create({
   container: {
