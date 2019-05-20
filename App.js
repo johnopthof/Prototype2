@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, Platform, StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity, Button, Platform, StyleSheet, Text, View} from 'react-native';
 import CounterApp from './src/CounterApp.js'
 import { createStore } from 'redux';
 import {Provider} from 'react-redux';
-
-
-
 
 type Props = {};
 
@@ -51,12 +48,11 @@ export default class App extends Component<Props> {
 
       <Provider store={store}>
         <CounterApp/>
+        <View style={styles.container}>
+          <Button title="storeData" onPress={this.storeData}></Button>
+          <Button title="Load data" onPress={this.retrieveData}></Button>
+        </View>
       </Provider>
-      <View style={styles.container}>
-         <Button title="storeData" onPress={this.storeData}></Button>
-        
-        <Button title="Load data" onPress={this.retrieveData}></Button>
-      </View>
 
     );
   }
