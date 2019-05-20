@@ -10,17 +10,19 @@ const initialState = {
   counter: 0
 }
 
- const reducer = (state=initialState) =>{
+ const reducer = (state=initialState, action) =>{
+   switch(action.type) {
+     case "INCREASE_COUNTER": 
+        return { counter: state.counter + 1}
+     case "DECREASE_COUNTER":
+        return { counter: state.counter - 1}
+   }
    return state;
  }
  
  const store = createStore(reducer);
  
 export default class App extends Component<Props> {
- 
-
-
-
   render() {
     return (
       <Provider store={store}>
@@ -28,7 +30,7 @@ export default class App extends Component<Props> {
       </Provider>
     );
   }
-}
+} 
 
 const styles = StyleSheet.create({
   container: {
