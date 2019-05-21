@@ -4,6 +4,7 @@ import CounterApp from './src/CounterApp.js'
 import SaveApp from './src/SaveApp.js'
 import { createStore } from 'redux';
 import {Provider} from 'react-redux';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import PinView from 'react-native-pin-view'
 
@@ -47,7 +48,7 @@ class PinScreen extends React.Component {
           style={styles.pin} buttonTextColor="#443456" inputActiveBgColor="#443456"
           onComplete={(val, clear)=> {
               if (val === '0000') {
-                this.setState({ isLoginSuccess: true });
+                this.props.navigation.navigate('Details')
               } else {
                 Alert.alert('Foutje bedankt');
                 clear();
@@ -75,21 +76,48 @@ const AppNavigator = createStackNavigator(
 
 export default createAppContainer(AppNavigator);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+const styles = EStyleSheet.create({
+	container: {
+		flex: 1,
+	},
+	logo:{
+		width:'80rem',
+		height:'80rem',
+	},
+	pin:{
+		fontFamily: 'zemestro-medium'
+	},
+	pinview:{
+		flex: 1,
+		justifyContent: 'center'
+	},
+	between:{
+		justifyContent:'space-between'
+	},
+	spacer:{
+		height:'52rem'
+	},
+	text: {
+		paddingVertical: '20rem',
+		color:'#ffffff',
+		fontSize: '18rem',
+		textAlign: 'center',
+		lineHeight:'24rem',
+		paddingHorizontal:'50rem',
+		fontFamily: 'zemestro-medium',
+	},
+	bottomButton:{
+		bottom:'0rem',
+	},
+	center:{
+		height:'200rem',
+		justifyContent: 'center',
+		alignItems:'center'
+	},
+	headerGradient: {
+		flex: 1,
+		flexDirection:'column',
+		justifyContent: 'center',
+		alignItems:'center'
+	},
 });
