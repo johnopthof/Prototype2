@@ -5,6 +5,7 @@ import SaveApp from './src/SaveApp.js'
 import { createStore } from 'redux';
 import {Provider} from 'react-redux';
 import { createStackNavigator, createAppContainer } from "react-navigation";
+import PinView from 'react-native-pin-view'
 
 type Props = {};
 
@@ -37,11 +38,25 @@ class App extends Component<Props> {
   }
 } 
 
-class HomeScreen extends React.Component {
+class PinScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Home Screen</Text>
+        <Text style={styles.text}>Login met je pincode</Text>
+        <PinView
+          style={styles.pin} buttonTextColor="#443456" inputActiveBgColor="#443456"
+          onComplete={(val, clear)=> {
+              if (val === '0000') {
+                this.setState({ isLoginSuccess: true });
+              } else {
+                Alert.alert('Foutje bedankt');
+                clear();
+              }
+            }
+          }
+          pinLength={4}
+        />
+        <Text>PinScreen</Text>
          <Button title="Go to Details" onPress={() => this.props.navigation.navigate('Details')}/>
       </View>
     );
@@ -50,7 +65,7 @@ class HomeScreen extends React.Component {
 
 const AppNavigator = createStackNavigator(
   {
-    Home: HomeScreen,
+    Home: PinScreen,
     Details: App
   },
   {
